@@ -1,0 +1,13 @@
+[Unit]
+Description=Prometheus Exporter for Airgradient One
+Documentation=https://github.com/kmulvey/airgradient_exporter_service
+After=network-online.target
+
+[Service]
+User=root
+Group=root
+Restart=on-failure
+ExecStart=/usr/bin/airgradient_exporter -addr ":9500"
+
+[Install]
+WantedBy=multi-user.target

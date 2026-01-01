@@ -1,0 +1,49 @@
+version: "2"
+run:
+  concurrency: 10
+  timeout: 10m
+  tests: true
+  modules-download-mode: readonly
+  go: "1.23"
+
+linters:
+  default: all
+  disable:
+    - nolintlint
+    - wsl # white space
+    - wsl_v5 # white space
+    - lll # long lines
+    - nlreturn # new lines before return
+    - varnamelen
+    - whitespace
+    - testpackage # should not use unexported functions and methods from source code in tests
+    - mnd # magic numbers
+    - depguard # deps white list
+    - exhaustruct # finds structures with uninitialized fields
+    - gomoddirectives # go.mod linting
+    - cyclop # TEMP ... should be addressed
+    - gochecknoglobals # who cares about prom globals
+    - godot # periods at end of comments
+    - noctx # context not used in this codebase
+    - gochecknoinits # we use init for prometheus metrics registration
+    - noinlineerr # we don't care about inlining errors
+  settings:
+    revive:
+      rules:
+        - name: package-comments
+          disabled: true
+    govet:
+      disable-all: false
+      enable-all: true
+      disable:
+        - shadow
+        - fieldalignment # giving false positives
+    testifylint:
+      # Enable all checkers (https://github.com/Antonboom/testifylint#checkers).
+      enable-all: true
+      disable:
+        - require-error
+    promlinter:
+      disabled-linters:
+        - "MetricUnits"
+
