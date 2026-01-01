@@ -89,3 +89,7 @@ A Grafana dashboard is included in `grafana-dashboard.json`. You can import this
 ## License
 
 [MIT](LICENSE)
+
+## Further Reading
+- [Local Server API](https://github.com/airgradienthq/arduino/blob/master/docs/local-server.md)
+- [Swagger](https://api.airgradient.com/public/docs/api/v1/)
