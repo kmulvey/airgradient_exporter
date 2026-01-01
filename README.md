@@ -35,15 +35,15 @@ go build
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `-addr` | `:9500` | Address for the Prometheus server to listen on. |
-| `-url` | `http://airgradient.local/measures/current` | URL to fetch AirGradient measurements from. Replace `airgradient.local` with your device's IP or hostname. |
-| `-timeout` | `30s` | Timeout duration between measurements. |
+| `-http-addr` | `:9500` | Address for the Prometheus server to listen on. |
+| `-measurements-url` | `http://airgradient.local/measures/current` | URL to fetch AirGradient measurements from. Replace `airgradient.local` with your device's IP or hostname. |
+| `-timeout` | `30s` | Timeout duration between measurements. Accepts values like `30s`, `2m`, `1h`. |
 | `-version`, `-v` | `false` | Print version information. |
 
 ### Example
 
 ```bash
-./airgradient_exporter -url http://192.168.1.50/measures/current -addr :9500
+./airgradient_exporter -measurements-url http://192.168.1.50/measures/current -http-addr :9500 -timeout 1m
 ```
 
 ## Systemd Service
@@ -60,7 +60,17 @@ A systemd service file is provided in `airgradient_exporter.service`.
    sudo cp airgradient_exporter.service /etc/systemd/system/
    ```
 
-3. Edit the service file to configure the `-url` flag if your device is not at `http://airgradient.local/measures/current`.
+
+3. (Optional) Create an environment file to override defaults:
+   ```bash
+   sudo nano /etc/default/airgradient_exporter
+   ```
+   Add your configuration:
+   ```ini
+   AIRGRADIENT_MEASUREMENTS_URL=http://192.168.1.50/measures/current
+   AIRGRADIENT_HTTP_ADDR=:9500
+   AIRGRADIENT_TIMEOUT=1m
+   ```
 
 4. Enable and start the service:
    ```bash

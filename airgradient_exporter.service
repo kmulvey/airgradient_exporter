@@ -1,13 +1,17 @@
 [Unit]
 Description=Prometheus Exporter for Airgradient One
-Documentation=https://github.com/kmulvey/airgradient_exporter_service
+Documentation=https://github.com/kmulvey/airgradient_exporter
 After=network-online.target
 
 [Service]
 User=root
 Group=root
 Restart=on-failure
-ExecStart=/usr/bin/airgradient_exporter -addr ":9500"
+EnvironmentFile=-/etc/default/airgradient_exporter
+Environment="AIRGRADIENT_HTTP_ADDR=:9500"
+Environment="AIRGRADIENT_MEASUREMENTS_URL=http://airgradient.local/measures/current"
+Environment="AIRGRADIENT_TIMEOUT=30s"
+ExecStart=/usr/bin/airgradient_exporter -http-addr $AIRGRADIENT_HTTP_ADDR -measurements-url $AIRGRADIENT_MEASUREMENTS_URL -timeout $AIRGRADIENT_TIMEOUT
 
 [Install]
 WantedBy=multi-user.target

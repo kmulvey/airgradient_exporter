@@ -23,19 +23,19 @@ func main() {
 		TimestampFormat: "2006/01/02 15:04:05",
 	})
 
-	var timeout time.Duration
+	var scrapeTimeout time.Duration
 	var addr string
 	var measurementsURL string
 	var v bool
 
-	flag.DurationVar(&timeout, "timeout", 30*time.Second, "timeout duration between measurements")
-	flag.StringVar(&addr, "addr", ":9500", "address for the Prometheus server")
-	flag.StringVar(&measurementsURL, "url", "http://airgradient.local/measures/current", "URL to fetch AirGradient measurements from")
+	flag.DurationVar(&scrapeTimeout, "timeout", 30*time.Second, "timeout duration between measurements")
+	flag.StringVar(&addr, "http-addr", ":9500", "address for the Prometheus server")
+	flag.StringVar(&measurementsURL, "measurements-url", "http://airgradient.local/measures/current", "URL to fetch AirGradient measurements from")
 	flag.BoolVar(&v, "version", false, "print version")
 	flag.BoolVar(&v, "v", false, "print version")
 	flag.Parse()
 
-	if addr == "" || measurementsURL == "" || timeout == 0 {
+	if addr == "" || measurementsURL == "" || scrapeTimeout == 0 {
 		log.Fatal("addr, url, and timeout are required")
 	}
 
@@ -48,14 +48,14 @@ func main() {
 		os.Exit(0)
 	}
 
-	http.Handle("/metrics", promhttp.Handler())
 	go func() {
 		log.Infof("Starting Prometheus server on %s", addr)
+		http.Handle("/metrics", promhttp.Handler())
 		srv := &http.Server{
 			Addr:         addr,
 			Handler:      nil,
-			ReadTimeout:  timeout,
-			WriteTimeout: timeout,
+			ReadTimeout:  time.Second * 2,
+			WriteTimeout: time.Second * 2,
 		}
 		if err := srv.ListenAndServe(); err != nil {
 			log.Fatal(err)
@@ -78,7 +78,7 @@ func main() {
 
 		updateMetrics(measurements)
 
-		time.Sleep(timeout)
+		time.Sleep(scrapeTimeout)
 	}
 }
 
