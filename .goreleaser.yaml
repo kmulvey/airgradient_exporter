@@ -71,8 +71,8 @@ nfpms:
     maintainer: Drummer <drum-roll@example.com>
 
     # Your app's description.
-      description: |-
-        Prometheus Exporter for AirGradient air quality monitors. Exposes device data as Prometheus metrics.
+    description: |-
+      Prometheus Exporter for AirGradient air quality monitors. Exposes device data as Prometheus metrics.
 
     # Your app's license.
     license: MIT
