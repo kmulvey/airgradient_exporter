@@ -1626,6 +1626,6 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "AirGradient Air Quality",
-  "uid": "84747ae2-0ad2-4b3a-82f4-2ebf62a8d65e",
+  "uid": "${DS_PROMETHEUS}",
   "version": 8
 }
