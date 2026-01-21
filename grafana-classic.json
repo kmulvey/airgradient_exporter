@@ -1023,7 +1023,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "aeaei0ipkjcw0c"
       },
       "fieldConfig": {
         "defaults": {
@@ -1071,6 +1072,10 @@
               {
                 "color": "green",
                 "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           }
@@ -1083,7 +1088,7 @@
         "x": 0,
         "y": 25
       },
-      "id": 27,
+      "id": 34,
       "options": {
         "legend": {
           "calcs": [],
@@ -1100,16 +1105,14 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus"
-          },
           "editorMode": "code",
-          "expr": "avg_over_time(airgradient_tvoc_raw[2m])",
+          "expr": "avg_over_time(airgradient_tvoc_index[5m])",
+          "legendFormat": "Senisiron VOC Index",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "TVOC Raw",
+      "title": "Senisiron VOC Index",
       "type": "timeseries"
     },
     {
@@ -1236,7 +1239,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "aeaei0ipkjcw0c"
       },
       "fieldConfig": {
         "defaults": {
@@ -1284,6 +1288,10 @@
               {
                 "color": "green",
                 "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           }
@@ -1296,7 +1304,7 @@
         "x": 0,
         "y": 33
       },
-      "id": 28,
+      "id": 35,
       "options": {
         "legend": {
           "calcs": [],
@@ -1313,16 +1321,14 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus"
-          },
           "editorMode": "code",
-          "expr": "avg_over_time(airgradient_nox_raw[2m])",
+          "expr": "avg_over_time(airgradient_nox_index[5m])",
+          "legendFormat": "Senisirion NOx Index",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "NOx Raw",
+      "title": "Senisirion NOx Index",
       "type": "timeseries"
     },
     {
@@ -1442,8 +1448,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds",
-            "seriesBy": "last"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisBorderShow": false,
@@ -1454,19 +1459,16 @@
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "scheme",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "smooth",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 2,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -1479,13 +1481,10 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "dashed"
+              "mode": "off"
             }
           },
-          "displayName": "NOx",
-          "fieldMinMax": false,
           "mappings": [],
-          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1499,20 +1498,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 12,
         "x": 0,
         "y": 40
       },
-      "id": 21,
+      "id": 28,
       "options": {
         "legend": {
-          "calcs": [
-            "min",
-            "max",
-            "last"
-          ],
-          "displayMode": "table",
+          "calcs": [],
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1529,12 +1524,12 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "avg_over_time(airgradient_nox_index[5m])",
+          "expr": "avg_over_time(airgradient_nox_raw[2m])",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "NOx Index",
+      "title": "NOx Raw",
       "type": "timeseries"
     },
     {
@@ -1544,59 +1539,74 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds",
-            "seriesBy": "last"
+            "mode": "palette-classic"
           },
-          "fieldMinMax": false,
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": 0
-              },
-              {
-                "color": "orange",
-                "value": -80
-              },
-              {
-                "color": "yellow",
-                "value": -70
-              },
-              {
                 "color": "green",
-                "value": -60
+                "value": 0
               }
             ]
-          },
-          "unit": "dBm"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 12,
         "x": 12,
         "y": 40
       },
-      "id": 24,
+      "id": 27,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "12.3.0",
       "targets": [
@@ -1604,12 +1614,16 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "airgradient_wifi_rssi_dbm",
+          "editorMode": "code",
+          "expr": "avg_over_time(airgradient_tvoc_raw[2m])",
+          "hide": false,
+          "legendFormat": "VOC Raw",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "WiFi RSSI",
-      "type": "stat"
+      "title": "VOC Raw",
+      "type": "timeseries"
     }
   ],
   "preload": false,
@@ -1620,12 +1634,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "AirGradient Air Quality",
-  "uid": "${DS_PROMETHEUS}",
-  "version": 8
+  "uid": "84747ae2-0ad2-4b3a-82f4-2ebf62a8d65e",
+  "version": 9
 }
+
