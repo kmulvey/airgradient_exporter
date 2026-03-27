@@ -32,7 +32,7 @@ release:
       
 archives:
   - id: dist
-    builds:
+    ids:
       - airgradient_exporter
     name_template: >-
       {{ .ProjectName }}_
@@ -63,7 +63,7 @@ nfpms:
 
     package_name: airgradient_exporter
 
-    builds:
+    ids:
       - airgradient_exporter
 
     # Your app's vendor.
