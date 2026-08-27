@@ -43,7 +43,9 @@ archives:
     files:
       - airgradient_exporter.service
       - LICENSE
-      - grafana-dashboard.json
+      - grafana-classic.json
+      - grafana-v1.json
+      - grafana-2.json
       
 checksum:
   name_template: 'checksums.txt'
