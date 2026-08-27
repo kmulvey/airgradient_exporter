@@ -45,7 +45,7 @@ archives:
       - LICENSE
       - grafana-classic.json
       - grafana-v1.json
-      - grafana-2.json
+      - grafana-v2.json
       
 checksum:
   name_template: 'checksums.txt'
