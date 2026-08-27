@@ -1,4 +1,5 @@
 # AirGradient Exporter
+[![Build](https://github.com/kmulvey/airgradient_exporter/actions/workflows/build.yml/badge.svg)](https://github.com/kmulvey/airgradient_exporter/actions/workflows/build.yml) [![Release](https://github.com/kmulvey/airgradient_exporter/actions/workflows/release.yml/badge.svg)](https://github.com/kmulvey/airgradient_exporter/actions/workflows/release.yml) [![Go Reference](https://pkg.go.dev/badge/github.com/kmulvey/airgradient_exporter.svg)](https://pkg.go.dev/github.com/kmulvey/airgradient_exporter)
 
 A Prometheus exporter for [AirGradient](https://www.airgradient.com/) air quality monitors. This exporter fetches data from the AirGradient device's local API and exposes it as Prometheus metrics.
 
