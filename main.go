@@ -93,7 +93,9 @@ func getMeasurements(measurementsURL string) (measurements AirGradientMeasures, 
 		return measurements, fmt.Errorf("failed to fetch measurements: %w", err)
 	}
 	defer func() {
-		err = resp.Body.Close()
+		if cerr := resp.Body.Close(); cerr != nil && err == nil {
+			err = cerr
+		}
 	}()
 
 	err = json.NewDecoder(resp.Body).Decode(&measurements)
