@@ -4,8 +4,11 @@ Documentation=https://github.com/kmulvey/airgradient_exporter
 After=network-online.target
 
 [Service]
-User=root
-Group=root
+DynamicUser=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+NoNewPrivileges=yes
 Restart=on-failure
 EnvironmentFile=-/etc/default/airgradient_exporter
 Environment="AIRGRADIENT_HTTP_ADDR=:9500"
