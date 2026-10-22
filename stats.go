@@ -188,7 +188,7 @@ var (
 	tvocIndex = prometheus.NewGauge(
 		prometheus.GaugeOpts{
 			Name: "airgradient_tvoc_index",
-			Help: "Senisiron VOC Index",
+			Help: "Sensirion VOC Index",
 		},
 	)
 
@@ -203,7 +203,7 @@ var (
 	noxIndex = prometheus.NewGauge(
 		prometheus.GaugeOpts{
 			Name: "airgradient_nox_index",
-			Help: "Senisirion NOx Index",
+			Help: "Sensirion NOx Index",
 		},
 	)
 
