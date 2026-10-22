@@ -230,6 +230,18 @@ var (
 		},
 		[]string{"led_mode"},
 	)
+
+	// Scrape health -- on a failed fetch from the device, every other
+	// metric above simply keeps its last successfully-set value, with no
+	// other signal that anything is wrong. This is what lets a consumer
+	// build a real staleness/dead-man's-switch alert instead of having to
+	// infer it from a reading implausibly holding one exact value.
+	lastScrapeSuccess = prometheus.NewGauge(
+		prometheus.GaugeOpts{
+			Name: "airgradient_last_scrape_success",
+			Help: "1 if the most recent fetch from the device succeeded, 0 otherwise",
+		},
+	)
 )
 
 func init() {
@@ -260,6 +272,7 @@ func init() {
 		noxRaw,
 		bootCount,
 		ledModeInfo,
+		lastScrapeSuccess,
 	)
 }
 

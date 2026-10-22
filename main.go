@@ -72,10 +72,11 @@ func main() {
 		measurements, err := getMeasurements(measurementsURL)
 		if err != nil {
 			log.Warn(err)
-			continue
+			lastScrapeSuccess.Set(0)
+		} else {
+			updateMetrics(measurements)
+			lastScrapeSuccess.Set(1)
 		}
-
-		updateMetrics(measurements)
 
 		time.Sleep(scrapeTimeout)
 	}

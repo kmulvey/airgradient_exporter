@@ -92,6 +92,9 @@ The exporter exposes the following metrics (prefixed with `airgradient_`):
 - **NOx:** `nox_index`, `nox_raw`
 - **WiFi:** `wifi_rssi_dbm`
 - **Device Info:** `info` (labels: serial_number, firmware, model), `boots`
+- **Scrape health:** `last_scrape_success` (1/0) -- on a failed fetch, every
+  other metric above simply keeps its last value, so this is the only
+  signal that the device has stopped responding
 
 ## Grafana Dashboard
 
