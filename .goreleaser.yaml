@@ -55,18 +55,12 @@ nfpms:
     package_name: airgradient_exporter
     ids:
       - airgradient_exporter
-    # Your app's vendor.
     vendor: Kevin Mulvey
-    # Your app's homepage.
     homepage: https://github.com/kmulvey/airgradient_exporter
-    # Your app's maintainer (probably you).
-    maintainer: Drummer <drum-roll@example.com>
-    # Your app's description.
+    maintainer: "Kevin Mulvey"
     description: |-
       Prometheus Exporter for AirGradient air quality monitors. Exposes device data as Prometheus metrics.
-    # Your app's license.
     license: MIT
-    # Formats to be generated.
     formats:
       - apk
       - deb
@@ -75,11 +69,8 @@ nfpms:
       - archlinux
     provides:
       - airgradient_exporter
-    # Path that the binaries should be installed.
-    # Default: '/usr/bin'
     bindir: /usr/bin
     contents:
-      # Basic file that applies to all packagers
       - src: airgradient_exporter.service
         dst: /etc/systemd/system/airgradient_exporter.service
     scripts:
@@ -89,15 +80,3 @@ nfpms:
     rpm:
       group: root
       compression: lzma
-      # The package is signed if a key_file is set
-      #signature:
-      # PGP secret key file path (can also be ASCII-armored).
-      # The passphrase is taken from the environment variable
-      # `$NFPM_ID_RPM_PASSPHRASE` with a fallback to `$NFPM_ID_PASSPHRASE`,
-      # where ID is the id of the current nfpm config.
-      # The id will be transformed to uppercase.
-      # E.g. If your nfpm id is 'default' then the rpm-specific passphrase
-      # should be set as `$NFPM_DEFAULT_RPM_PASSPHRASE`
-      #
-      # Templates: allowed
-      #key_file: "/home/kmulvey/keys/sec.gpg"
