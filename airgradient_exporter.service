@@ -1,20 +1,27 @@
 [Unit]
 Description=Prometheus Exporter for Airgradient One
 Documentation=https://github.com/kmulvey/airgradient_exporter
+Wants=network-online.target
 After=network-online.target
 
 [Service]
 DynamicUser=yes
-ProtectSystem=strict
-ProtectHome=yes
-PrivateTmp=yes
-NoNewPrivileges=yes
-Restart=on-failure
+Type=exec
+Restart=always
+RestartSec=5s
 EnvironmentFile=-/etc/default/airgradient_exporter
 Environment="AIRGRADIENT_HTTP_ADDR=:9500"
 Environment="AIRGRADIENT_MEASUREMENTS_URL=http://airgradient.local/measures/current"
 Environment="AIRGRADIENT_TIMEOUT=30s"
 ExecStart=/usr/bin/airgradient_exporter -http-addr $AIRGRADIENT_HTTP_ADDR -measurements-url $AIRGRADIENT_MEASUREMENTS_URL -timeout $AIRGRADIENT_TIMEOUT
+
+# Security Sandboxing & Hardening
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+NoNewPrivileges=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
 
 [Install]
 WantedBy=multi-user.target
